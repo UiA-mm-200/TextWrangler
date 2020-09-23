@@ -3,7 +3,7 @@ module.exports = class TextParser {
     constructor(sourceText) {
         this.allWordsInText = sourceText.split(" ");
         this.therosurus = {};
-        this.terminatorsInText = sourceText.search(/[^\w\s]/g);
+        this.terminatorsInText = this.calculateTerminators(sourceText)
         this.bigWords = [];
 
         for (let word of this.allWordsInText) {
@@ -17,6 +17,21 @@ module.exports = class TextParser {
             }
 
         }
+    }
+
+    calculateTerminators(sourceText) {
+        let terminators = 0;
+        let match;
+        let pattern = /[^\w\s]/gm
+        while ((match = pattern.exec(sourceText)) !== null) {
+            if (match.index === pattern.lastIndex) {
+                pattern.lastIndex++;
+            }
+            match.forEach((match, groupIndex) => {
+                terminators++;
+            });
+        }
+        return terminators
     }
 
     calculateLixValue() {
