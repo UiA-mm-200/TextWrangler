@@ -7,7 +7,12 @@ if (process.argv.length >= 3) {
         let reader = new textReader(sourceTextFile);
         let parser = new textParser(reader.text);
 
-        console.log(parser.therosurus);
+        let lixIndex = parser.calculateLixValue();
+        console.log(`Lix index er ${lixIndex}`);
+
+
+
+
     } catch (error) {
         console.error(error)
     }
